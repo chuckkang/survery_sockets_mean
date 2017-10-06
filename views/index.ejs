@@ -1,0 +1,70 @@
+<html>
+
+<head>
+	<title></title>
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// this triggers the connection event in our server!
+			var socket = io.connect();
+			// we'll write all the socket stuff after the above line!
+			 $('#button').click(function () {
+					 var name = document.getElementById('name').value;
+					 var location = document.getElementById('location').value;
+					 var language = document.getElementById('language').value;
+					 var comment = document.getElementById('comment').value;
+					//  console.log(name + "THIS IS THE STRING" );
+					//  console.log(name, location, language, comment,  "THIS IS THE NAME");
+					socket.emit("posting_form", { 
+						name: name,
+						location: location,
+						language: language,
+						comment: comment
+					});
+				});
+				socket.on('updated_message', function (data) {
+					//console.log('The server says: ' + data.response);
+					$('#return_socket').append('<p>' + data.title + " " + data.name + " " + data.name + data.location + " " + data.language + " " + data.comment + "<br> " + data.random_number + '</p>');
+					$('#return_socket').append('<p>' + '</p>');
+					$('#return_socket').append('<p>' + '</p>');
+					$('#return_socket').append('<p>' + '</p>');
+					$('#return_socket').append('<p>' + '</p>');
+					$('#return_socket').append('<p>' + '</p>');
+				});
+		});
+	</script>
+</head>
+
+<body>
+	
+
+			<div id="wrapper">
+				
+				<p>Your Name: <input type="text" id="name" name="name"></p>
+				<p>Dojo Location:
+					<select id="location" name="location">
+					<option value="San Jose">San Jose</option>
+					<option value="Chicago">Chicago</option>
+					<option value="San Francisco">San Francisco</option>
+					<option value="Los Angeles">Los Angeles</option>
+				</select></p>
+				<p>Language:
+					<select id="language" name="language">
+					<option value="C#">C#</option>
+					<option value="Javascript">Javascript</option>
+					<option value="Python">Python</option>
+					<option value="Ruby">Ruby</option>
+				</select>
+				</p>
+				<p>Comment: <input type="textarea" id="comment" name="comment" rows="3" cols="50" value=" "></p>
+				<button id="button" name="button">THis is teh submit</button>
+			
+		<div id="return_socket">
+
+		</div>
+		</div>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+body {
+	background-color: lightgrey;
+	margin: auto;
+}
+
+#wrapper {
+	border: 2px solid red;
+	width: 500px;
+	margin: auto;
+}
+
+#return_socket {
+	border: 2px solid green;
+	width: 100%;
+}
